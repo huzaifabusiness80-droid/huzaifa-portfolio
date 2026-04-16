@@ -93,20 +93,23 @@ export default function Hero() {
         </h1>
       </div>
 
-      {/* Bottom row */}
+      {/* Bottom row — Enhanced with premium elements */}
       <div className="hero-bottom">
+        <div className="hero-topo-bg" />
+        <div className="white-dot-subtle" />
+        
         <span className="hero-label">About</span>
 
         <div className="hero-about">
           <p>
-            I&apos;m a full stack developer focused on building modern, fast,
-            and reliable digital products. I make every site performant,
-            scalable, and feel great for real users.
+            I&apos;m a web developer focused on building modern, fast, and
+            reliable websites. I care not only about how a site looks, but
+            also about how it performs, scales, and feels for real users. 
           </p>
           <a href="#strategy" className="hero-learn-more" id="hero-learn-more">
             Learn more
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="18" height="18" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
         </div>

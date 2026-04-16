@@ -15,8 +15,8 @@ const PROJECTS = [
   {
     id: 'project-platteros',
     name: 'Platteros',
-    brief: 'SaaS-based Restaurant Management System. Streamlining reservations, sales tracking, and table management for modern dining establishments.',
-    tags: ['Stripe', 'Next.js', 'Node.js', 'PostgreSQL'],
+    brief: 'SaaS-based Restaurant Management System. Enhanced with advanced AI integration for intelligent automation, predictive sales tracking, and table management.',
+    tags: ['Next.js', 'AI Integration', 'Node.js', 'PostgreSQL', 'Stripe'],
     year: '2025',
     url: 'https://platteros.com/',
   },

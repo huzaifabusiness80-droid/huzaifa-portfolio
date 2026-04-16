@@ -51,7 +51,7 @@ const SKILLS = [
 function ArrowIcon() {
   return (
     <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-      <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -83,14 +83,14 @@ function CardPanel({ card, index }: { card: typeof CARDS[0]; index: number }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.opacity   = '0';
+    el.style.opacity = '0';
     el.style.transform = 'translateY(60px)';
     el.style.transition = `opacity 0.75s ease ${index * 0.1}s, transform 0.85s cubic-bezier(0.16,1,0.3,1) ${index * 0.1}s`;
 
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.style.opacity   = '1';
+          el.style.opacity = '1';
           // Don't override sticky transform — only use translateY entry
           el.style.transition = 'opacity 0.75s ease, filter 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1)';
           obs.unobserve(el);
