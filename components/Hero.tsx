@@ -97,14 +97,14 @@ export default function Hero() {
       <div className="hero-bottom">
         <div className="hero-topo-bg" />
         <div className="white-dot-subtle" />
-        
+
         <span className="hero-label">About</span>
 
         <div className="hero-about">
           <p>
             I&apos;m a web developer focused on building modern, fast, and
             reliable websites. I care not only about how a site looks, but
-            also about how it performs, scales, and feels for real users. 
+            also about how it performs, scales, and feels for real users.
           </p>
           <a href="#strategy" className="hero-learn-more" id="hero-learn-more">
             Learn more
