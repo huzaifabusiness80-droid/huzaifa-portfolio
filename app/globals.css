@@ -514,16 +514,12 @@ body:has(button:hover) .cursor-ring {
   color: var(--text-dim);
   letter-spacing: -0.01em;
   text-transform: none;
-    font-style: italic;
-  font-family:cursive;
-
+  
 }
 
 .hero-about {
   max-width: 600px;
   text-align: left;
-  font-style: italic;
-  font-family:cursive;
 
 }
 
