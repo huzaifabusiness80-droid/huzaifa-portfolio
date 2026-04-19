@@ -25,7 +25,10 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Huzaifa | Full Stack Developer — Karachi, Pakistan',
+  title: 'Huzaifa — Full Stack Developer',
+  icons: {
+    icon: '/favicon.svg',
+  },
   description:
     'Huzaifa is a full stack developer based in Karachi, Pakistan. Building modern, fast, and reliable web applications using React, Next.js, Node.js, and PostgreSQL.',
   keywords: [
