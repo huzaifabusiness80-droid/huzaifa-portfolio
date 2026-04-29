@@ -5,127 +5,150 @@ import * as THREE from 'three';
 
 export default function HeroCanvas() {
   const mountRef = useRef<HTMLDivElement>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const pointsRef = useRef<THREE.Points | null>(null);
+  const animationRef = useRef<number>(0);
+  const timeRef = useRef(0);
+  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  const isActiveRef = useRef(true);
 
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    // ── Scene ────────────────────────────────────────────
-    const scene    = new THREE.Scene();
-    const W        = mount.clientWidth;
-    const H        = mount.clientHeight;
-    const camera   = new THREE.PerspectiveCamera(55, W / H, 0.1, 1000);
-    camera.position.set(0, 0, 52);
+    // Detect mobile/tablet for performance optimization
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
+    const isTablet = window.innerWidth < 1024;
+    const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Adjust particle density based on device
+    const COLS = isMobile ? 40 : isTablet ? 60 : 80;
+    const ROWS = isMobile ? 25 : isTablet ? 35 : 45;
+
+    // ── Scene ────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    sceneRef.current = scene;
+
+    const W = mount.clientWidth;
+    const H = mount.clientHeight;
+    const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 1000);
+    camera.position.set(0, 0, 52);
+    cameraRef.current = camera;
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: !isMobile,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
     renderer.setSize(W, H);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
 
     // ── Particle wave grid ───────────────────────────────
-    const COLS = 80, ROWS = 45;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(COLS * ROWS * 3);
-    const origins   = new Float32Array(COLS * ROWS * 2);
+    const origins = new Float32Array(COLS * ROWS * 2);
+
+    const xScale = isMobile ? 80 : 130;
+    const yScale = isMobile ? 50 : 75;
 
     for (let i = 0; i < COLS; i++) {
       for (let j = 0; j < ROWS; j++) {
-        const idx = (i * ROWS + j);
-        const x = (i / (COLS - 1) - 0.5) * 130;
-        const y = (j / (ROWS - 1) - 0.5) * 75;
-        positions[idx * 3]     = x;
+        const idx = i * ROWS + j;
+        const x = (i / (COLS - 1) - 0.5) * xScale;
+        const y = (j / (ROWS - 1) - 0.5) * yScale;
+        positions[idx * 3] = x;
         positions[idx * 3 + 1] = y;
         positions[idx * 3 + 2] = 0;
-        origins[idx * 2]     = x;
+        origins[idx * 2] = x;
         origins[idx * 2 + 1] = y;
       }
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    const sizes = new Float32Array(COLS * ROWS).fill(1.8);
+    const sizes = new Float32Array(COLS * ROWS).fill(isMobile ? 1.5 : 1.8);
     geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const material = new THREE.PointsMaterial({
-      color:       new THREE.Color('#74A567'),
-      size:        0.45,
+      color: new THREE.Color('#9d00ff'),
+      size: isMobile ? 0.35 : 0.45,
       transparent: true,
-      opacity:     0.22,
+      opacity: 0.28,
       sizeAttenuation: true,
     });
 
     const points = new THREE.Points(geometry, material);
     scene.add(points);
-
-    // ── Thin line mesh ───────────────────────────────────
-    const lineMat = new THREE.LineBasicMaterial({
-      color:       new THREE.Color(0xffffff),
-      transparent: true,
-      opacity:     0.04,
-    });
-
-    const lines: THREE.Line[] = [];
-    // Horizontal flow lines
-    for (let j = 0; j < ROWS; j += 3) {
-      const pts: THREE.Vector3[] = [];
-      for (let i = 0; i < COLS; i++) {
-        const x = (i / (COLS - 1) - 0.5) * 130;
-        const y = (j / (ROWS - 1) - 0.5) * 75;
-        pts.push(new THREE.Vector3(x, y, 0));
-      }
-      const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
-      const l = new THREE.Line(lineGeo, lineMat);
-      lines.push(l);
-      scene.add(l);
-    }
+    pointsRef.current = points;
 
     // Theme detection
     const updateThemeStyles = () => {
       const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      lineMat.color.set(isLight ? 0x000000 : 0xffffff);
-      lineMat.opacity = isLight ? 0.08 : 0.04;
-      material.opacity = isLight ? 0.4 : 0.22;
+      material.opacity = isLight ? 0.34 : 0.2;
     };
 
     updateThemeStyles();
     const observer = new MutationObserver(updateThemeStyles);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // ── Mouse parallax ───────────────────────────────────
-    let targetX = 0, targetY = 0;
+    // ── Mouse parallax (disabled on touch devices) ───────────────────────────────────
     const onMouseMove = (e: MouseEvent) => {
-      targetX = (e.clientX / window.innerWidth  - 0.5) * 6;
-      targetY = (e.clientY / window.innerHeight - 0.5) * 3;
+      if (isMobile) return;
+      mouseRef.current.targetX = (e.clientX / window.innerWidth - 0.5) * 6;
+      mouseRef.current.targetY = (e.clientY / window.innerHeight - 0.5) * 3;
     };
-    window.addEventListener('mousemove', onMouseMove);
+
+    if (!isMobile) {
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+    }
+
+    // ── Visibility handling ──────────────────────────────
+    const onVisibilityChange = () => {
+      isActiveRef.current = document.visibilityState === 'visible';
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     // ── Animation loop ───────────────────────────────────
-    let animId: number;
-    let t = 0;
-
     const animate = () => {
-      animId = requestAnimationFrame(animate);
-      t += 0.006;
+      animationRef.current = requestAnimationFrame(animate);
 
+      if (!isActiveRef.current || shouldReduceMotion) {
+        renderer.render(scene, camera);
+        return;
+      }
+
+      timeRef.current += isMobile ? 0.004 : 0.006;
+      const t = timeRef.current;
       const pos = geometry.attributes.position.array as Float32Array;
+
+      // Animate wave - simplified on mobile
+      const waveIntensity = isMobile ? 0.05 : 0.07;
+      const zScale = isMobile ? 3 : 5;
 
       for (let i = 0; i < COLS; i++) {
         for (let j = 0; j < ROWS; j++) {
-          const idx = (i * ROWS + j);
-          const ox  = origins[idx * 2];
-          const oy  = origins[idx * 2 + 1];
+          const idx = i * ROWS + j;
+          const ox = origins[idx * 2];
+          const oy = origins[idx * 2 + 1];
           pos[idx * 3 + 2] =
-            Math.sin(ox * 0.07 + t)     * Math.cos(oy * 0.07 + t * 0.7) * 5 +
+            Math.sin(ox * waveIntensity + t) * Math.cos(oy * waveIntensity + t * 0.7) * zScale +
             Math.sin(ox * 0.03 + t * 1.3) * 2;
         }
       }
 
       geometry.attributes.position.needsUpdate = true;
 
-      // Camera easing
-      camera.position.x += (targetX - camera.position.x) * 0.04;
-      camera.position.y += (-targetY - camera.position.y) * 0.04;
+      // Camera easing with lerp
+      const ease = isMobile ? 0.02 : 0.04;
+      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * ease;
+      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * ease;
+      camera.position.x = mouseRef.current.x;
+      camera.position.y = -mouseRef.current.y;
       camera.lookAt(scene.position);
 
       renderer.render(scene, camera);
@@ -133,6 +156,7 @@ export default function HeroCanvas() {
 
     animate();
 
+    // ── Resize handler ───────────────────────────────────
     const onResize = () => {
       const w = mount.clientWidth;
       const h = mount.clientHeight;
@@ -140,16 +164,18 @@ export default function HeroCanvas() {
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
-    window.addEventListener('resize', onResize);
 
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // Cleanup
     return () => {
-      cancelAnimationFrame(animId);
+      cancelAnimationFrame(animationRef.current);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       observer.disconnect();
       geometry.dispose();
       material.dispose();
-      lineMat.dispose();
       renderer.dispose();
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);

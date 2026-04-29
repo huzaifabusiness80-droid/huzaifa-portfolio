@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
-  { href: '#strategy', label: 'About'    },
+  { href: '#about', label: 'About'    },
   { href: '#projects', label: 'Projects' },
   { href: '#services', label: 'Services' },
   { href: '#contact',  label: 'Contact'  },
@@ -65,49 +65,72 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
   const close = () => setOpen(false);
 
   return (
     <>
       <nav id="nav" className={`nav${scrolled ? ' scrolled' : ''}`}>
-        <Link href="#hero" className="nav-logo" aria-label="Back to top">
-          HUZAIFA.DEV
-        </Link>
-        
-        <div className="nav-actions">
-          <ThemeToggle />
-          <button
-            className="nav-menu-btn"
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-            aria-expanded={open}
-          >
-            <span className="nav-menu-dot" aria-hidden="true" />
-            MENU
-          </button>
+        <div className="nav-inner">
+          <Link href="#hero" className="nav-logo" aria-label="Back to top">
+            Muhammad Huzaifa
+          </Link>
+
+          <div className="nav-center-links" aria-label="Primary navigation">
+            {NAV_LINKS.map(({ href, label }) => (
+              <a key={href} href={href} className="nav-link">
+                {label}
+              </a>
+            ))}
+          </div>
+          
+          <div className="nav-actions">
+            <ThemeToggle />
+            <button
+              className="nav-menu-btn"
+              onClick={() => setOpen((prev) => !prev)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="mobile-menu-drawer"
+            >
+              <span className="nav-menu-dot" aria-hidden="true" />
+              {open ? 'Close' : 'Menu'}
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Full-screen drawer */}
       <div
+        id="mobile-menu-drawer"
         className={`nav-links-drawer${open ? ' open' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
+        onClick={close}
       >
-        <button className="drawer-close" onClick={close} aria-label="Close menu">
-          Close ✕
-        </button>
-        {NAV_LINKS.map(({ href, label }) => (
-          <a
-            key={href}
-            href={href}
-            className="drawer-link"
-            onClick={close}
-          >
-            {label}
-          </a>
-        ))}
+        <div className="nav-drawer-panel" onClick={(e) => e.stopPropagation()}>
+          <button className="drawer-close" onClick={close} aria-label="Close menu">
+            Close ✕
+          </button>
+          {NAV_LINKS.map(({ href, label }) => (
+            <a
+              key={href}
+              href={href}
+              className="drawer-link"
+              onClick={close}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
       </div>
     </>
   );

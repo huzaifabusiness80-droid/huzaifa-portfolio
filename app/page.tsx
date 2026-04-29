@@ -3,6 +3,7 @@ import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import ScrollProgress from '@/components/ScrollProgress';
 import Hero from '@/components/Hero';
+import AboutIntro from '@/components/AboutIntro';
 import Marquee from '@/components/Marquee';
 import About from '@/components/About';
 import Services from '@/components/Services';
@@ -26,6 +27,7 @@ export default function HomePage() {
 
       <main>
         <Hero />
+        <AboutIntro />
         <Marquee />
         <About />
         <Services />
