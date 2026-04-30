@@ -112,7 +112,7 @@ export default function About() {
           <div className="max-w-[var(--section-max)] mx-auto flex flex-col lg:flex-row items-baseline justify-between gap-12">
             <div className="w-full">
               <span className="text-muted uppercase tracking-widest text-xs font-semibold">Strategy</span>
-              <h2 className="mt-4 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[0.95] tracking-tight text-text uppercase">
+              <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[0.95] tracking-tight text-text uppercase">
                 How I Approach<br />Every Project?
               </h2>
             </div>
@@ -140,12 +140,13 @@ export default function About() {
                 <span className="text-accent">Stack</span>
               </h3>
             </div>
-            <div className="flex flex-wrap gap-2.5 max-w-4xl" aria-label="Skills">
-              {SKILLS.map((s, i) => (
+            <div className="flex flex-wrap gap-3 max-w-4xl" aria-label="Skills">
+              {SKILLS.map((s) => (
                 <span
-                  className="font-body text-[0.72rem] font-medium tracking-widest uppercase text-muted border border-border px-4 py-2.5 rounded-full hover:border-border-med transition-all cursor-default"
+                  className="group font-body text-[0.68rem] font-bold tracking-[0.15em] uppercase text-muted border border-border/50 px-5 py-3 rounded-full hover:text-text hover:border-accent/40 transition-all duration-300 cursor-default flex items-center gap-2"
                   key={s}
                 >
+                  <span className="w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                   {s}
                 </span>
               ))}

@@ -36,8 +36,8 @@ export default function Footer() {
     <footer ref={ref} className="mx-auto max-w-[1510px] py-12 px-[var(--section-pad)] border-t border-border/50">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-4">
         {/* Logo in border box */}
-        <div className=" px-4 py-2 rounded-sm">
-          <a href="#hero" className="font-display text-xl font-bold tracking-tighter text-text uppercase whitespace-nowrap">
+        <div className="border border-border/40 px-6 py-3 rounded-xl hover:border-accent/40 transition-colors duration-500">
+          <a href="#hero" className="font-display text-lg font-bold tracking-[-0.03em] text-text uppercase whitespace-nowrap">
             Muhammad Huzaifa
           </a>
         </div>

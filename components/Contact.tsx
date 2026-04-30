@@ -55,25 +55,24 @@ export default function Contact() {
         </div>
 
         <div ref={bigRef} className="max-w-[var(--section-max)] mx-auto">
-          <h2 className="font-display text-[clamp(2rem,6vw,4.5rem)] font-bold leading-[1] tracking-tighter text-text uppercase mb-16 lg:mb-24">
-            Have an idea?<br />
-            Let&apos;s build<br />
-            it together.
+          <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05] tracking-tight text-text uppercase mb-12 lg:mb-16 max-w-[15ch]">
+            Ready to build<br />
+            your next <span className="text-accent">Vision?</span>
           </h2>
         </div>
 
-        <div ref={gridRef} className="max-w-[var(--section-max)] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
-          <div className="flex flex-col gap-8">
+        <div ref={gridRef} className="max-w-[var(--section-max)] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+          <div className="flex flex-col gap-6">
             <div className="space-y-2">
               <a 
                 href="mailto:huzaifabusiness60@gmail.com" 
-                className="text-xl lg:text-2xl font-display font-bold text-text hover:text-accent transition-colors uppercase tracking-tight"
+                className="text-lg lg:text-xl font-display font-bold text-text hover:text-accent transition-colors uppercase tracking-tight"
                 id="contact-email"
               >
                 huzaifabusiness60@gmail.com
               </a>
-              <p className="text-muted mt-5 text-[0.65rem] font-bold tracking-[0.2em] uppercase">
-                Karachi, Pakistan
+              <p className="text-muted mt-4 text-[0.6rem] font-bold tracking-[0.2em] uppercase flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" /> Karachi, Pakistan
               </p>
             </div>
             
@@ -83,11 +82,12 @@ export default function Contact() {
                   key={id} 
                   id={id} 
                   href={href} 
-                  className="text-muted hover:text-text text-[0.65rem] font-bold tracking-[0.2em] uppercase transition-colors"
+                  className="text-muted hover:text-text text-[0.62rem] font-bold tracking-[0.2em] uppercase transition-colors relative group/link"
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
                   {label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover/link:w-full" />
                 </a>
               ))}
             </nav>
@@ -96,12 +96,12 @@ export default function Contact() {
           <div className="flex justify-start lg:justify-end">
             <button
               onClick={() => setModalOpen(true)}
-              className="group flex items-center gap-4 bg-text text-bg px-10 py-5 rounded-full text-[0.7rem] font-bold tracking-[0.1em] uppercase hover:scale-105 active:scale-95 transition-all shadow-xl"
+              className="group flex items-center gap-4 bg-transparent border border-border-med text-text px-8 py-4 rounded-full text-[0.65rem] font-bold tracking-[0.2em] uppercase hover:bg-text hover:text-bg hover:border-text transition-all duration-500 shadow-xl"
               id="contact-cta-btn"
             >
               Send me a message 
-              <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <span className="w-8 h-8 rounded-full border border-border-med flex items-center justify-center group-hover:border-bg/20 transition-all duration-500 transform group-hover:rotate-45">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </span>

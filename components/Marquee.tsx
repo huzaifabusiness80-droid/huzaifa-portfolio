@@ -18,16 +18,16 @@ export default function Marquee() {
         {/* Repeat twice for seamless loop */}
         <div className="flex items-center gap-12 px-6">
           {ITEMS.map((item, i) => (
-            <div key={i} className="flex items-center gap-4 text-text/30 text-sm font-display font-bold uppercase tracking-[0.2em]">
-              <span className="text-accent">✦</span>
+            <div key={i} className="flex items-center gap-6 text-text/10 text-sm font-display font-bold uppercase tracking-[0.3em] transition-colors hover:text-text/20 duration-500">
+              <span className="text-accent/40">✦</span>
               {item}
             </div>
           ))}
         </div>
         <div className="flex items-center gap-12 px-6" aria-hidden="true">
           {ITEMS.map((item, i) => (
-            <div key={i} className="flex items-center gap-4 text-text/30 text-sm font-display font-bold uppercase tracking-[0.2em]">
-              <span className="text-accent">✦</span>
+            <div key={i} className="flex items-center gap-6 text-text/10 text-sm font-display font-bold uppercase tracking-[0.3em] transition-colors hover:text-text/20 duration-500">
+              <span className="text-accent/40">✦</span>
               {item}
             </div>
           ))}

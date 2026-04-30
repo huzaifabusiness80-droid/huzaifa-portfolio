@@ -18,45 +18,46 @@ export default function Hero() {
             I specialize in engineering fast, scalable, and conversion-focused web solutions that transform your business vision into a market-leading digital reality.
           </p>
 
-          <div className="flex flex-wrap gap-2.5 mb-12" aria-label="Key highlights">
-            <span className="inline-flex items-center text-[0.65rem] font-semibold tracking-widest uppercase text-muted border border-border rounded-full px-4 py-2.5">
-              High-Conversion Design
+          <div className="flex flex-wrap gap-3 mb-12" aria-label="Key highlights">
+            <span className="inline-flex items-center text-[0.62rem] font-bold tracking-[0.15em] uppercase text-muted border border-border/50 rounded-full px-4 py-2">
+              <span className="w-1 h-1 bg-accent rounded-full mr-2" /> High-Conversion
             </span>
-            <span className="inline-flex items-center text-[0.65rem] font-semibold tracking-widest uppercase text-muted border border-border rounded-full px-4 py-2.5">
-              Scalable Architecture
+            <span className="inline-flex items-center text-[0.62rem] font-bold tracking-[0.15em] uppercase text-muted border border-border/50 rounded-full px-4 py-2">
+              <span className="w-1 h-1 bg-accent rounded-full mr-2" /> Scalable Build
             </span>
-            <span className="inline-flex items-center text-[0.65rem] font-semibold tracking-widest uppercase text-muted border border-border rounded-full px-4 py-2.5">
-              Performance Optimized
+            <span className="inline-flex items-center text-[0.62rem] font-bold tracking-[0.15em] uppercase text-muted border border-border/50 rounded-full px-4 py-2">
+              <span className="w-1 h-1 bg-accent rounded-full mr-2" /> Fast Delivery
             </span>
           </div>
 
           <div className="flex flex-wrap gap-4">
             <Link
               href="#projects"
-              className="bg-text text-bg text-[0.75rem] font-semibold tracking-widest uppercase rounded-full px-8 py-4 hover:opacity-90 transition-all shadow-lg"
+              className="bg-text text-bg text-[0.72rem] font-bold tracking-[0.15em] uppercase rounded-full px-8 py-4 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg"
             >
               View Projects
             </Link>
             <Link
               href="#contact"
-              className="text-text border border-border-med text-[0.75rem] font-semibold tracking-widest uppercase rounded-full px-8 py-4 hover:border-text transition-all"
+              className="text-text border border-border-med text-[0.72rem] font-bold tracking-[0.15em] uppercase rounded-full px-8 py-4 hover:border-text transition-all"
             >
-              Let's Talk
+              Let&apos;s Talk
             </Link>
           </div>
         </div>
 
         {/* Right Image */}
         <div className="w-full max-w-[520px] justify-self-end order-2 mt-8 lg:mt-0">
-          <div className="relative overflow-hidden bg-bg3 border border-border rounded-3xl aspect-[4/5] lg:aspect-square">
+          <div className="relative group overflow-hidden bg-bg3 border border-border/40 rounded-[2rem] aspect-[4/5] lg:aspect-square">
             <Image
               src="/Gemini_Generated_Image_szua74szua74szua (1).png"
               alt="Muhammad Huzaifa professional portrait"
               width={800}
               height={800}
               priority
-              className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg/40 to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-700" />
           </div>
         </div>
 

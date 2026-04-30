@@ -81,20 +81,20 @@ export default function Services() {
           {SERVICES.map((s, i) => (
             <div 
               key={i} 
-              className="group border-b border-border py-12 lg:py-16 flex flex-col lg:flex-row lg:items-center justify-between gap-8 hover:bg-bg2/50 transition-colors px-4 lg:px-0"
+              className="group border-b border-border py-12 lg:py-16 flex flex-col lg:flex-row lg:items-center justify-between gap-8 hover:bg-bg2/30 transition-all duration-500 px-6 lg:px-8 -mx-6 lg:-mx-8 rounded-xl"
             >
-              <div className="flex flex-col gap-4 max-w-[600px]">
-                <h3 className="font-display text-2xl lg:text-4xl font-bold text-text uppercase tracking-tight">{s.title}</h3>
-                <p className="text-dim text-sm lg:text-base leading-relaxed opacity-70">
+              <div className="flex flex-col gap-5 max-w-[650px]">
+                <h3 className="font-display text-2xl lg:text-4xl font-bold text-text uppercase tracking-tight transition-transform duration-500 group-hover:translate-x-2">{s.title}</h3>
+                <p className="text-dim text-sm lg:text-base leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                   {s.desc}
                 </p>
               </div>
               
-              <div className="flex items-center gap-6 self-end lg:self-center">
-                <span className="text-[0.65rem] font-bold tracking-widest text-text opacity-80 uppercase group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-8 self-end lg:self-center">
+                <span className="text-[0.68rem] font-bold tracking-[0.2em] text-muted uppercase group-hover:text-accent transition-colors duration-500">
                   {s.linkText}
                 </span>
-                <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-border flex items-center justify-center text-text group-hover:bg-text group-hover:text-bg transition-all duration-300">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-full border border-border flex items-center justify-center text-muted group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500 transform group-hover:scale-110">
                   <ArrowIcon />
                 </div>
               </div>

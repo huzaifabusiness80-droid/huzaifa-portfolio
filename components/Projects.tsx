@@ -78,39 +78,38 @@ export default function Projects() {
           {PROJECTS.map((project, i) => (
             <div 
               key={i} 
-              className="group flex flex-col gap-8 relative border-b border-border pb-12"
+              className="group flex flex-col gap-10 relative border-b border-border/50 pb-16 lg:pb-20 hover:border-accent transition-colors duration-500"
             >
               {/* Top: Tags and Arrow */}
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex flex-wrap gap-2">
+              <div className="flex items-start justify-between gap-6">
+                <div className="flex flex-wrap gap-2.5">
                   {project.tags.map(tag => (
-                    <span key={tag} className="text-[0.6rem] font-bold tracking-widest text-muted border border-border px-3 py-1.5 rounded-full uppercase">
+                    <span key={tag} className="text-[0.62rem] font-bold tracking-[0.1em] text-muted border border-border/40 px-3.5 py-1.5 rounded-full uppercase transition-all duration-300 group-hover:border-accent/20 group-hover:text-accent">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex-shrink-0 w-11 h-11 lg:w-12 lg:h-12 rounded-full border border-border-med flex items-center justify-center text-muted group-hover:bg-text group-hover:text-bg transition-all duration-300">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
-                    <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="flex-shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-border flex items-center justify-center text-muted group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500 transform group-hover:rotate-45">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
               </div>
 
               {/* Middle: Title and Desc */}
-              <div className="flex flex-col gap-4">
-                <h3 className="text-2xl font-bold text-text tracking-tight">
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <span className="text-accent text-[0.65rem] font-bold tracking-widest uppercase opacity-60">
+                    {project.year}
+                  </span>
+                  <div className="h-px flex-1 bg-border/20" />
+                </div>
+                <h3 className="text-3xl lg:text-4xl font-bold text-text tracking-tight uppercase group-hover:text-accent transition-colors duration-500">
                   {project.title}
                 </h3>
-                <p className="text-muted text-base leading-relaxed max-w-[55ch]">
+                <p className="text-dim text-sm lg:text-base leading-relaxed max-w-[50ch] opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                   {project.desc}
                 </p>
-              </div>
-
-              {/* Bottom: Year */}
-              <div className="mt-auto">
-                <span className="text-accent text-[0.65rem] font-bold tracking-widest uppercase">
-                  {project.year}
-                </span>
               </div>
             </div>
           ))}

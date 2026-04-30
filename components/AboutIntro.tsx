@@ -45,18 +45,28 @@ export default function AboutIntro() {
         </div>
 
         {/* Capabilities Grid */}
-        <div className="flex flex-col gap-8 p-12 bg-bg2 border border-border rounded-3xl backdrop-blur-md">
-          <div className="flex flex-col gap-2">
-            <h3 className="font-display text-xl font-bold uppercase tracking-wider text-text">Technical Architecture</h3>
-            <p className="text-sm leading-relaxed text-muted">Building resilient, scalable systems that handle high traffic with ease.</p>
+        <div className="flex flex-col gap-10 p-8 lg:p-12 bg-bg2 border border-border/50 rounded-[2rem] relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/10 transition-colors duration-700" />
+          
+          <div className="flex flex-col gap-3 relative">
+            <h3 className="text-lg font-bold uppercase tracking-[0.1em] text-text flex items-center gap-3">
+              <span className="w-1.5 h-1.5 bg-accent rounded-full" /> Technical Architecture
+            </h3>
+            <p className="text-[0.9rem] leading-relaxed text-muted pl-4.5">Building resilient, scalable systems that handle high traffic with ease.</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-display text-xl font-bold uppercase tracking-wider text-text">Product Strategy</h3>
-            <p className="text-sm leading-relaxed text-muted">Aligning development goals with user needs for maximum impact.</p>
+
+          <div className="flex flex-col gap-3 relative">
+            <h3 className="text-lg font-bold uppercase tracking-[0.1em] text-text flex items-center gap-3">
+              <span className="w-1.5 h-1.5 bg-accent rounded-full" /> Product Strategy
+            </h3>
+            <p className="text-[0.9rem] leading-relaxed text-muted pl-4.5">Aligning development goals with user needs for maximum impact.</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="font-display text-xl font-bold uppercase tracking-wider text-text">Experience Design</h3>
-            <p className="text-sm leading-relaxed text-muted">Crafting seamless, accessible journeys that users actually enjoy.</p>
+
+          <div className="flex flex-col gap-3 relative">
+            <h3 className="text-lg font-bold uppercase tracking-[0.1em] text-text flex items-center gap-3">
+              <span className="w-1.5 h-1.5 bg-accent rounded-full" /> Experience Design
+            </h3>
+            <p className="text-[0.9rem] leading-relaxed text-muted pl-4.5">Crafting seamless, accessible journeys that users actually enjoy.</p>
           </div>
         </div>
 

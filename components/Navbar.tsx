@@ -75,7 +75,7 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto max-w-[1490px] px-[var(--section-pad)] flex items-center justify-between">
-          <Link href="#hero" className="font-display text-xl font-bold tracking-tighter text-text hover:opacity-80 transition-opacity uppercase">
+          <Link href="#hero" className="font-display text-xl font-bold tracking-[-0.03em] text-text hover:opacity-80 transition-opacity uppercase">
             Muhammad Huzaifa
           </Link>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
               <a 
                 key={href} 
                 href={href} 
-                className="font-body text-[0.8rem] font-medium tracking-widest uppercase text-dim hover:text-text hover:bg-bg3 px-3 py-2 rounded-full transition-all"
+                className="font-body text-[0.72rem] font-semibold tracking-[0.15em] uppercase text-muted hover:text-text hover:bg-white/5 px-4 py-2 rounded-full transition-all duration-300"
               >
                 {label}
               </a>
