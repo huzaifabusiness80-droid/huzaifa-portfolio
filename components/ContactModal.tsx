@@ -98,7 +98,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Form header */}
         <div className="cm-form-header">
           <span className="cm-eyebrow">✦ New enquiry</span>
-          <h2 className="cm-title">Start a<br /><em>Project</em></h2>
+          <h2 className="cm-title">Start a<br />Project</h2>
         </div>
 
         {/* The form */}
@@ -175,7 +175,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       {/* ── RIGHT: DECORATIVE SIDE ───────────────────────── */}
       <div className="cm-right" aria-hidden="true">
         {/* Big watermark text */}
-        <div className="cm-big-text">LET'S<br />WORK</div>
+        <div className="cm-big-text">LET&apos;S<br />WORK</div>
 
         {/* Info cards */}
         <div className="cm-info-stack">

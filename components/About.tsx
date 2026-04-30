@@ -148,7 +148,7 @@ export default function About() {
           <div className="skills-header">
             <h3 className="skills-title">
               Tech<br />
-              <em style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Stack</em>
+              <span style={{ color: 'var(--accent)' }}>Stack</span>
             </h3>
           </div>
           <div className="skills-cloud" aria-label="Skills">

@@ -5,7 +5,7 @@ export default function Hero() {
     <section id="hero">
       <div className="hero-layout">
         <div className="hero-content">
-          <p className="hero-kicker">Web Developer • Frontend Specialist</p>
+          <p className="hero-kicker">Available For Project</p>
           <h1 className="hero-heading">
             I build <span>beautiful</span> websites that help brands grow.
           </h1>
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="hero-photo-wrap" aria-label="Profile image">
           <div className="hero-photo-frame">
             <Image
-              src="/Gemini_Generated_Image_szua74szua74szua.png"
+              src="/Gemini_Generated_Image_szua74szua74szua (1).png"
               alt="Muhammad Huzaifa professional portrait"
               width={640}
               height={640}

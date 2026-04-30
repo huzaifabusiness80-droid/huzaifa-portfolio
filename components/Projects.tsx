@@ -1,7 +1,7 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
-import TiltCard    from './TiltCard';
+import TiltCard from './TiltCard';
 
 const PROJECTS = [
   {
@@ -17,7 +17,7 @@ const PROJECTS = [
     name: 'Platteros',
     brief: 'SaaS-based Restaurant Management System. Enhanced with advanced AI integration for intelligent automation, predictive sales tracking, and table management.',
     tags: ['Next.js', 'AI Integration', 'Node.js', 'PostgreSQL', 'Stripe'],
-    year: '2025',
+    year: '2026',
     url: 'https://platteros.com/',
   },
   {
@@ -33,7 +33,7 @@ const PROJECTS = [
     name: 'CareerHelpp Portal',
     brief: 'An advanced student management system designed to track applications, university placements, and education timelines in real-time.',
     tags: ['Next JS', 'Tailwind CSS', 'PostgreSQL', 'Prisma', 'NextAuth'],
-    year: '2025',
+    year: '2026',
     url: 'https://careerhelpp-website.vercel.app/',
   },
 ];
@@ -41,7 +41,7 @@ const PROJECTS = [
 function ArrowIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -51,9 +51,8 @@ export default function Projects() {
     <section id="projects">
       <ScrollReveal>
         <div className="projects-eyebrow">
-          <span className="section-eyebrow" style={{ paddingTop: '8px' }}>03</span>
           <h2 className="projects-title">
-            Recent<br /><em>Work</em>
+            Recent<br />Work
           </h2>
         </div>
       </ScrollReveal>
@@ -61,9 +60,9 @@ export default function Projects() {
       <ScrollReveal delay={80}>
         <div className="projects-grid" aria-label="Project showcase">
           {PROJECTS.map((p) => (
-            <a 
-              key={p.id} 
-              href={p.url} 
+            <a
+              key={p.id}
+              href={p.url}
               target={p.url.startsWith('http') ? "_blank" : "_self"}
               rel="noopener noreferrer"
               style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}

@@ -34,7 +34,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer ref={ref}>
-      <a href="#hero" className="footer-logo" aria-label="Back to top">HUZAIFA.DEV</a>
+      <a href="#hero" className="footer-logo" aria-label="Back to top">Muhammad Huzaifa</a>
       <p className="footer-copy"><small>©{year} Huzaifa. All Rights Reserved.</small></p>
       <nav className="footer-links" aria-label="Footer navigation">
         {LINKS.map(({ href, label }) => (

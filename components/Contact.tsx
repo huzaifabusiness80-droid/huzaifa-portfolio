@@ -51,13 +51,13 @@ export default function Contact() {
     <>
       <section id="contact">
         <div ref={headRef}>
-          <p className="section-eyebrow" style={{ marginBottom: '24px' }}>04 — Contact</p>
+          <p className="section-eyebrow" style={{ marginBottom: '24px' }}>Contact</p>
         </div>
 
         <div ref={bigRef}>
           <h2 className="contact-big">
             Have an idea?<br />
-            <em>Let&apos;s build</em><br />
+            Let&apos;s build<br />
             it together.
           </h2>
         </div>
