@@ -22,7 +22,7 @@ const CARDS = [
     desc: 'I write clean, well-structured, and maintainable code with a strong focus on clarity and long-term scalability. This approach makes projects easier to understand and extend over time.',
     link: 'My workflow',
     href: '#projects',
-    variant: 'green' as const,
+    variant: 'purple' as const,
   },
   {
     num: '03',
@@ -38,7 +38,7 @@ const CARDS = [
     desc: 'Every project is built with search engines in mind — semantic markup, optimised metadata, Core Web Vitals, and accessibility baked in from the very start.',
     link: 'Get started',
     href: '#contact',
-    variant: 'green' as const,
+    variant: 'purple' as const,
   },
 ];
 
@@ -56,27 +56,6 @@ function ArrowIcon() {
   );
 }
 
-function RotatingBadge() {
-  const label = 'Huzaifa • Full Stack Dev • Pakistan • ';
-  return (
-    <div className="rotating-badge" aria-hidden="true">
-      <svg className="badge-ring" viewBox="0 0 110 110" fill="none">
-        <defs>
-          <path id="circle-path" d="M 55,55 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-        </defs>
-        <circle cx="55" cy="55" r="50" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-        <text fill="rgba(255,255,255,0.55)" fontSize="9.5" fontFamily="inherit" letterSpacing="2.5" fontWeight="500">
-          <textPath href="#circle-path">{label.repeat(2)}</textPath>
-        </text>
-      </svg>
-      <div className="badge-center">
-        <span className="badge-globe">🌐</span>
-      </div>
-    </div>
-  );
-}
-
-/* Single card panel — handles its own entry animation */
 function CardPanel({ card, index }: { card: typeof CARDS[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -91,7 +70,6 @@ function CardPanel({ card, index }: { card: typeof CARDS[0]; index: number }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.style.opacity = '1';
-          // Don't override sticky transform — only use translateY entry
           el.style.transition = 'opacity 0.75s ease, filter 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1)';
           obs.unobserve(el);
         }
@@ -102,40 +80,50 @@ function CardPanel({ card, index }: { card: typeof CARDS[0]; index: number }) {
     return () => obs.disconnect();
   }, [index]);
 
+  const bgClass = card.variant === 'light' ? 'bg-white text-black' : 'bg-[#f3e8ff] text-black';
+
   return (
     <div
       ref={ref}
-      className={`strategy-card-panel ${card.variant}`}
+      className={`relative border-b border-border overflow-hidden cursor-none transition-all duration-300 min-h-[400px] ${bgClass}`}
     >
-      <div className="strategy-card-content">
-        <h3 className="strategy-card-name">{card.name}</h3>
-        <p className="strategy-card-sub">{card.desc}</p>
-        <a href={card.href} className="strategy-card-link">
-          {card.link} <ArrowIcon />
-        </a>
+      <div className="mx-auto max-w-[var(--section-max)] grid grid-cols-1 lg:grid-cols-[1fr_auto] items-stretch h-full">
+        <div className="p-10 lg:p-20 flex flex-col justify-center">
+          <h3 className="font-display text-3xl lg:text-5xl font-bold uppercase tracking-tight mb-6">{card.name}</h3>
+          <p className="max-w-[50ch] text-base lg:text-lg opacity-70 mb-10 leading-relaxed">{card.desc}</p>
+          <a href={card.href} className="inline-flex items-center gap-3 text-[0.7rem] font-bold tracking-widest uppercase border-b border-current pb-1 w-fit opacity-80 hover:opacity-100 transition-opacity">
+            {card.link} <ArrowIcon />
+          </a>
+        </div>
+        <div className="hidden lg:flex items-end p-8 font-display text-[12rem] font-semibold tracking-tighter opacity-10 leading-none select-none">
+          {card.num}
+        </div>
       </div>
-      <div className="strategy-card-num" aria-hidden="true">{card.num}</div>
     </div>
   );
 }
 
 export default function About() {
   return (
-    <section id="strategy">
+    <section id="strategy" className="bg-bg">
       {/* Header */}
       <ScrollReveal>
-        <div className="strategy-header">
-          <div className="strategy-header-left">
-            <span className="section-eyebrow">Strategy</span>
-            <h2 className="strategy-title">
-              How I Approach<br />Every Project?
-            </h2>
+        <div className="px-[var(--section-pad)] py-20 lg:py-32">
+          <div className="max-w-[var(--section-max)] mx-auto flex flex-col lg:flex-row items-baseline justify-between gap-12">
+            <div className="w-full">
+              <span className="text-muted uppercase tracking-widest text-xs font-semibold">Strategy</span>
+              <h2 className="mt-4 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[0.95] tracking-tight text-text uppercase">
+                How I Approach<br />Every Project?
+              </h2>
+            </div>
+            <div className="hidden lg:block relative -top-20 right-0">
+              <FloatingOrb />
+            </div>
           </div>
-          <FloatingOrb />
         </div>
       </ScrollReveal>
 
-      {/* ── STICKY STACKING CARDS ─────────────────────── */}
+      {/* Sticky Stacking Cards */}
       <StickyStack>
         {CARDS.map((card, i) => (
           <CardPanel key={card.num} card={card} index={i} />
@@ -144,23 +132,24 @@ export default function About() {
 
       {/* Skills */}
       <ScrollReveal delay={80}>
-        <div className="skills-section">
-          <div className="skills-header">
-            <h3 className="skills-title">
-              Tech<br />
-              <span style={{ color: 'var(--accent)' }}>Stack</span>
-            </h3>
-          </div>
-          <div className="skills-cloud" aria-label="Skills">
-            {SKILLS.map((s, i) => (
-              <span
-                className="skill-chip"
-                key={s}
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
-                {s}
-              </span>
-            ))}
+        <div className="px-[var(--section-pad)] py-20 lg:py-32 border-b border-border">
+          <div className="mx-auto max-w-[var(--section-max)]">
+            <div className="flex flex-col lg:flex-row lg:items-baseline gap-12 lg:gap-24 mb-16 lg:mb-24">
+              <h3 className="font-display text-[clamp(2rem,4.5vw,3.2rem)] font-bold uppercase leading-[1] tracking-tight text-text">
+                Tech<br />
+                <span className="text-accent">Stack</span>
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-2.5 max-w-4xl" aria-label="Skills">
+              {SKILLS.map((s, i) => (
+                <span
+                  className="font-body text-[0.72rem] font-medium tracking-widest uppercase text-muted border border-border px-4 py-2.5 rounded-full hover:border-border-med transition-all cursor-default"
+                  key={s}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </ScrollReveal>

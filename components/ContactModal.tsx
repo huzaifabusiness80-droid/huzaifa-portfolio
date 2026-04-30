@@ -10,16 +10,16 @@ interface ContactModalProps {
 function SendIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const [visible, setVisible]   = useState(false);
-  const [mounted, setMounted]   = useState(false);
-  const [form, setForm]         = useState({ name: '', email: '', project: '', message: '' });
-  const [status, setStatus]     = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', project: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
 
   useEffect(() => {
     if (isOpen) {
@@ -52,8 +52,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:    form.name,
-          email:   form.email,
+          name: form.name,
+          email: form.email,
           service: form.project,
           message: form.message,
         }),
@@ -89,7 +89,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <span className="cm-brand">HUZAIFA.DEV</span>
           <button className="cm-close" onClick={onClose} aria-label="Close form" id="cm-close-btn">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M2 2L16 16M16 2L2 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M2 2L16 16M16 2L2 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
             <span>Close</span>
           </button>
@@ -157,16 +157,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
 
           <div className="cm-footer">
-            
+
             <button
               type="submit"
               className={`cm-submit${status === 'sent' ? ' sent' : ''}`}
               disabled={status === 'sending' || status === 'sent'}
               id="cm-submit-btn"
             >
-              {status === 'idle'    && <><span>Send message</span><SendIcon /></>}
+              {status === 'idle' && <><span>Send message</span><SendIcon /></>}
               {status === 'sending' && <span>Sending...</span>}
-              {status === 'sent'    && <span>Message sent ✓</span>}
+              {status === 'sent' && <span>Message sent ✓</span>}
             </button>
           </div>
         </form>

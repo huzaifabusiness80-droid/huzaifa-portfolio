@@ -15,9 +15,7 @@ import Footer from '@/components/Footer';
 export default function HomePage() {
   return (
     <>
-      {/* Fixed layout chrome */}
-      <div className="grid-lines" aria-hidden="true" />
-      <div className="side-label" aria-hidden="true">Portfolio</div>
+
 
       {/* Client-only UI */}
       <ScrollProgress />

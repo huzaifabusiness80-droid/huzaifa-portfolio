@@ -33,14 +33,29 @@ export default function Footer() {
 
   const year = new Date().getFullYear();
   return (
-    <footer ref={ref}>
-      <a href="#hero" className="footer-logo" aria-label="Back to top">Muhammad Huzaifa</a>
-      <p className="footer-copy"><small>©{year} Huzaifa. All Rights Reserved.</small></p>
-      <nav className="footer-links" aria-label="Footer navigation">
-        {LINKS.map(({ href, label }) => (
-          <a href={href} key={href}>{label}</a>
-        ))}
-      </nav>
+    <footer ref={ref} className="mx-auto max-w-[1510px] py-12 px-[var(--section-pad)] border-t border-border/50">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-4">
+        {/* Logo in border box */}
+        <div className=" px-4 py-2 rounded-sm">
+          <a href="#hero" className="font-display text-xl font-bold tracking-tighter text-text uppercase whitespace-nowrap">
+            Muhammad Huzaifa
+          </a>
+        </div>
+
+        {/* Copyright center */}
+        <p className="text-muted text-[0.6rem] uppercase tracking-[0.15em] font-medium lg:absolute lg:left-1/2 lg:-translate-x-1/2 whitespace-nowrap">
+          ©{year} Huzaifa. All Rights Reserved.
+        </p>
+
+        {/* Nav links right */}
+        <nav className="flex items-center gap-8" aria-label="Footer navigation">
+          {LINKS.map(({ href, label }) => (
+            <a key={href} href={href} className="text-muted hover:text-text text-[0.65rem] font-bold tracking-widest uppercase transition-colors">
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
     </footer>
   );
 }
