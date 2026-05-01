@@ -14,7 +14,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Huzaifa — Full Stack Developer',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/Gemini_Generated_Image_szua74szua74szua (1).png',
   },
   description:
     'Huzaifa is a full stack developer based in Karachi, Pakistan. Building modern, fast, and reliable web applications using React, Next.js, Node.js, and PostgreSQL.',

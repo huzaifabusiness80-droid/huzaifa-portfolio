@@ -75,8 +75,9 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto max-w-[1490px] px-[var(--section-pad)] flex items-center justify-between">
-          <Link href="#hero" className="font-display text-xl font-bold tracking-[-0.03em] text-text hover:opacity-80 transition-opacity uppercase">
-            Muhammad Huzaifa
+          <Link href="#hero" className="font-display text-lg sm:text-xl font-bold tracking-[-0.03em] text-text hover:opacity-80 transition-opacity uppercase">
+            <span className="lg:hidden">M. Huzaifa</span>
+            <span className="hidden lg:inline">Muhammad Huzaifa</span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-4">

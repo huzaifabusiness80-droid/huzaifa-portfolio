@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative overflow-hidden px-[var(--section-pad)] py-20 lg:py-32">
+    <section id="hero" className="relative overflow-hidden px-[var(--section-pad)] pt-32 pb-20 lg:py-32">
       <div className="mx-auto max-w-[var(--section-max)] grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
 
         {/* Left Content */}

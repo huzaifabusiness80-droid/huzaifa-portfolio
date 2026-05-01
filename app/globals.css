@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-dm-sans), sans-serif;
-  --font-body: var(--font-dm-sans), sans-serif;
+  --font-display: "DM Sans", var(--font-dm-sans), sans-serif;
+  --font-body: "DM Sans", var(--font-dm-sans), sans-serif;
+  --font-sans: "DM Sans", var(--font-dm-sans), sans-serif;
   
   --color-bg: var(--bg);
   --color-text: var(--text);
@@ -57,16 +58,26 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-family: "DM Sans", var(--font-dm-sans), sans-serif;
   }
 
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--body);
+    font-family: "DM Sans", var(--font-dm-sans), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background 0.5s ease, color 0.5s ease;
     overflow-x: hidden;
+  }
+
+  /* Force DM Sans on all elements to ensure no other fonts are used */
+  *, *::before, *::after {
+    font-family: inherit;
+  }
+
+  h1, h2, h3, h4, h5, h6, button, input, textarea, select {
+    font-family: "DM Sans", var(--font-dm-sans), sans-serif;
   }
 }
 

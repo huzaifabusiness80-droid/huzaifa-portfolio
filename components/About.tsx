@@ -43,9 +43,9 @@ const CARDS = [
 ];
 
 const SKILLS = [
-  'React', 'Next.js', 'TypeScript', 'Node.js',
-  'Express', 'PostgreSQL', 'MongoDB', 'Prisma',
-  'Tailwind', 'Docker', 'AWS', 'GraphQL', 'Git', 'Redis',
+  'HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'TypeScript', 'Node.js',
+  'Express', 'PostgreSQL', 'MongoDB', 'Prisma', 'Tailwind', 'Bootstrap',
+  'Shadcn UI', 'Zod', 'Figma', 'Stripe', 'Git', 'GitHub', 'Docker', 'AWS', 'Vercel',
 ];
 
 function ArrowIcon() {
