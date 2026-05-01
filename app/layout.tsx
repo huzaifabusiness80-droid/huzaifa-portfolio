@@ -12,7 +12,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Huzaifa — Full Stack Developer',
+  title: 'Huzaifa Full Stack Developer Crafting High-End Digital Products that Scale Businesses.',
   icons: {
     icon: '/favicon.ico',
   },
