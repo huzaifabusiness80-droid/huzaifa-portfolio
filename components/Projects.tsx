@@ -8,27 +8,41 @@ const PROJECTS = [
     year: '2025',
     tags: ['NEXT.JS', 'FRAMER MOTION', 'TAILWIND CSS', 'NODEMAILER'],
     desc: 'A high-end, professional portfolio website built for a creative designer. Focus on smooth animations, clean typography, and minimalist UI.',
-    link: '#',
+    link: 'https://shayandesigns.com/',
   },
   {
     title: 'Platteros',
     year: '2026',
     tags: ['NEXT.JS', 'AI INTEGRATION', 'NODE.JS', 'POSTGRESQL', 'STRIPE'],
     desc: 'SaaS-based Restaurant Management System. Enhanced with advanced AI integration for intelligent automation, predictive sales tracking, and table management.',
-    link: '#',
+    link: 'https://www.platteros.com/',
   },
   {
-    title: 'Business Management',
+    title: 'Oriole Lume',
     year: '2025',
-    tags: ['REACT JS', 'EXPRESS', 'NODE JS', 'POSTGRESQL', 'ELECTRON JS'],
-    desc: 'A comprehensive SaaS solution for hybrid online and offline business operations. Manages inventory, finances, and team workflows seamlessly.',
-    link: '#',
+    tags: ['NEXT.JS', 'CREATIVE AGENCY', 'GSAP', 'WEBGL'],
+    desc: 'A cutting-edge creative agency website featuring high-end visual storytelling and immersive digital experiences.',
+    link: 'https://oriolelume.com/',
+  },
+  {
+    title: 'Benzen Interface',
+    year: '2026',
+    tags: ['NEXT.JS', 'UI/UX', 'DASHBOARD', 'TAILWIND CSS'],
+    desc: 'A high-performance interface design system for modern web applications, focusing on clarity and user efficiency.',
+    link: 'https://benzen-interface.vercel.app/',
   },
   {
     title: 'CareerHelpp Portal',
     year: '2026',
     tags: ['NEXT JS', 'TAILWIND CSS', 'POSTGRESQL', 'PRISMA', 'NEXTAUTH'],
     desc: 'An advanced student management system designed to track applications, university placements, and education timelines in real-time.',
+    link: 'https://careerhelpp.com/',
+  },
+  {
+    title: 'Business Management',
+    year: '2025',
+    tags: ['REACT JS', 'EXPRESS', 'NODE JS', 'POSTGRESQL', 'ELECTRON JS'],
+    desc: 'A comprehensive SaaS solution for hybrid online and offline business operations. Manages inventory, finances, and team workflows seamlessly.',
     link: '#',
   },
 ];
@@ -76,15 +90,18 @@ export default function Projects() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 lg:gap-y-24">
           {PROJECTS.map((project, i) => (
-            <div 
+            <a 
               key={i} 
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex flex-col gap-10 relative border-b border-border/50 pb-16 lg:pb-20 hover:border-accent transition-colors duration-500"
             >
               {/* Top: Tags and Arrow */}
               <div className="flex items-start justify-between gap-6">
                 <div className="flex flex-wrap gap-2.5">
                   {project.tags.map(tag => (
-                    <span key={tag} className="text-[0.62rem] font-bold tracking-[0.1em] text-muted border border-border/40 px-3.5 py-1.5 rounded-full uppercase transition-all duration-300 group-hover:border-accent/20 group-hover:text-accent">
+                    <span key={tag} className="text-[0.62rem] font-bold tracking-[0.15em] text-muted border border-border/40 px-3.5 py-1.5 rounded-full uppercase transition-all duration-300 group-hover:border-accent/20 group-hover:text-accent">
                       {tag}
                     </span>
                   ))}
@@ -111,7 +128,7 @@ export default function Projects() {
                   {project.desc}
                 </p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 

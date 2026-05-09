@@ -3,19 +3,19 @@
 import { useEffect, useRef } from 'react';
 
 export default function Cursor() {
-  const dotRef  = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const dot  = dotRef.current;
+    const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
     const onMove = (e: MouseEvent) => {
-      dot.style.left  = e.clientX + 'px';
-      dot.style.top   = e.clientY + 'px';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
       ring.style.left = e.clientX + 'px';
-      ring.style.top  = e.clientY + 'px';
+      ring.style.top = e.clientY + 'px';
     };
 
     document.addEventListener('mousemove', onMove);
@@ -24,7 +24,7 @@ export default function Cursor() {
 
   return (
     <>
-      <div className="cursor-dot"  ref={dotRef}  aria-hidden="true" />
+      <div className="cursor-dot" ref={dotRef} aria-hidden="true" />
       <div className="cursor-ring" ref={ringRef} aria-hidden="true" />
     </>
   );

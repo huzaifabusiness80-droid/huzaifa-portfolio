@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative overflow-hidden px-[var(--section-pad)] pt-32 pb-20 lg:py-32">
+    <section id="hero" className="relative overflow-hidden px-[var(--section-pad)] pt-32 pb-20 lg:pt-44 lg:pb-32">
       <div className="mx-auto max-w-[var(--section-max)] grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
 
         {/* Left Content */}
@@ -48,16 +48,16 @@ export default function Hero() {
 
         {/* Right Image */}
         <div className="w-full max-w-[520px] justify-self-end order-2 mt-8 lg:mt-0">
-          <div className="relative group overflow-hidden bg-bg3 border border-border/40 rounded-[2rem] aspect-[4/5] lg:aspect-square">
+          <div className="relative group overflow-hidden bg-bg3 border border-white/10 rounded-[2rem] aspect-[4/5] lg:aspect-square">
             <Image
               src="/Gemini_Generated_Image_szua74szua74szua (1).png"
               alt="Muhammad Huzaifa professional portrait"
               width={800}
               height={800}
               priority
-              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+              className="w-full h-full object-cover brightness-[1.08] contrast-[1.05] saturate-[1.1] group-hover:scale-105 transition-all duration-1000 ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg/40 to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg/30 to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
           </div>
         </div>
 
