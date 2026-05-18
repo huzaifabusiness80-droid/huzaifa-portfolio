@@ -28,8 +28,8 @@ export default function HomePage() {
         <AboutIntro />
         <Marquee />
         <About />
-        <Services />
         <Projects />
+        <Services />
         <CtaBanner />
         <Contact />
       </main>
