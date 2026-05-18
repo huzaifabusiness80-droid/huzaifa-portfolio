@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
-  { href: '#about', label: 'About'    },
+  { href: '#about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#services', label: 'Services' },
-  { href: '#contact',  label: 'Contact'  },
+  { href: '#contact', label: 'Contact' },
 ];
 
 function ThemeToggle() {
@@ -37,11 +37,11 @@ function ThemeToggle() {
       <div className="relative w-[18px] h-[18px]">
         {theme === 'dark' ? (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
         ) : (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         )}
       </div>
@@ -51,7 +51,7 @@ function ThemeToggle() {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen]         = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60);
@@ -68,10 +68,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
-        id="nav" 
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 border-b ${
-          scrolled ? 'bg-bg/90 backdrop-blur-md border-border py-3' : 'bg-transparent border-transparent py-5'
+      <nav
+        id="nav"
+        className={`fixed left-0 right-0 z-[1000] transition-all duration-300 ${
+          scrolled
+            ? 'top-6 mx-4 rounded-xl border border-border bg-bg/90 backdrop-blur-md py-3.5 shadow-lg shadow-black/5 lg:top-0 lg:mx-0 lg:rounded-none lg:border-t-0 lg:border-x-0 lg:border-b lg:border-border lg:py-3'
+            : 'top-0 border-b border-transparent bg-transparent py-5'
         }`}
       >
         <div className="mx-auto max-w-[1490px] px-[var(--section-pad)] flex items-center justify-between">
@@ -82,16 +84,16 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-4">
             {NAV_LINKS.map(({ href, label }) => (
-              <a 
-                key={href} 
-                href={href} 
+              <a
+                key={href}
+                href={href}
                 className="font-body text-[0.72rem] font-semibold tracking-[0.15em] uppercase text-muted hover:text-text hover:bg-white/5 px-4 py-2 rounded-full transition-all duration-300"
               >
                 {label}
               </a>
             ))}
           </div>
-          
+
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <button
@@ -108,16 +110,14 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-[2000] transition-all duration-700 ${
-          open ? 'visible opacity-100' : 'invisible opacity-0'
-        }`}
+        className={`fixed inset-0 z-[2000] transition-all duration-700 ${open ? 'visible opacity-100' : 'invisible opacity-0'
+          }`}
         onClick={close}
       >
         <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-700 ${open ? 'opacity-100' : 'opacity-0'}`} />
-        <div 
-          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-bg border-l border-border p-8 flex flex-col transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${
-            open ? 'translate-x-0' : 'translate-x-full'
-          }`}
+        <div
+          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-bg border-l border-border p-8 flex flex-col transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${open ? 'translate-x-0' : 'translate-x-full'
+            }`}
           onClick={(e) => e.stopPropagation()}
         >
           <button className="self-end text-muted hover:text-text text-sm uppercase tracking-widest mb-12" onClick={close}>
