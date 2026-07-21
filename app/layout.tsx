@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
-import { DM_Sans } from 'next/font/google';
+import { Host_Grotesk } from 'next/font/google';
 import './globals.css';
 
-const dmSans = DM_Sans({
+const hostGrotesk = Host_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-dm-sans',
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-host-grotesk',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Huzaifa Full Stack Developer Crafting High-End Digital Products that Scale Businesses.',
+  title: 'Huzaifa | Full Stack Developer Crafting High-End Digital Products',
   icons: {
     icon: '/favicon.ico',
   },
   description:
-    'Huzaifa is a full stack developer based in Karachi, Pakistan. Building modern, fast, and reliable web applications using React, Next.js, Node.js, and PostgreSQL.',
+    'Huzaifa is a full stack developer building modern, fast, and reliable web applications using React, Next.js, Node.js, and PostgreSQL.',
   keywords: [
     'Full Stack Developer',
     'React Developer',
@@ -61,8 +61,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <body>{children}</body>
+    <html lang="en" data-theme="light" className={`${hostGrotesk.variable} ${hostGrotesk.className}`}>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
