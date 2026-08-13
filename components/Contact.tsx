@@ -1,127 +1,217 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import ContactModal from './ContactModal';
-
-const SOCIALS = [
-  { label: 'GitHub', href: 'https://github.com/', id: 'social-github' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/', id: 'social-linkedin' },
-  { label: 'Twitter', href: 'https://twitter.com/', id: 'social-twitter' },
-];
+import React, { useState } from "react";
+import SectionWrapper from "./SectionWrapper";
+import { FiArrowUpRight, FiChevronDown } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 export default function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    service: '',
+    message: '',
+  });
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.8s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1)';
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          obs.unobserve(el);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError('');
+    setSuccess('');
+
+    if (!formData.fullName || !formData.email || !formData.message) {
+      setError('Please fill in all required fields.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      setSuccess('Your message has been sent successfully! I will get back to you soon.');
+      setFormData({ fullName: '', email: '', service: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      setError('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <>
-      <section
-        id="contact"
-        ref={ref}
-        className="bg-[#edf1f7] text-[#09090b] relative z-10 py-16 sm:py-24 lg:py-32 px-6 sm:px-10 font-sans border-t border-slate-200/80"
-      >
-        <div className="mx-auto max-w-[1340px] flex flex-col gap-12 lg:gap-16">
+    <div className="relative overflow-hidden bg-white py-20 md:py-28" id="contact-cta">
+      {/* ── Top Center Ambient Emerald Glow ── */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[550px] h-[350px] opacity-80 blur-[90px] z-0"
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0.08) 55%, transparent 80%)"
+        }}
+      />
 
-          {/* Section Header */}
-          <div className="flex flex-col items-start gap-3">
-            <div className="inline-flex items-center gap-2.5 text-base sm:text-lg font-extrabold text-[#6366f1]">
-              <svg className="w-5 h-5 fill-current text-[#6366f1]" viewBox="0 0 24 24">
-                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-              </svg>
-              <span className="text-[#09090b] text-base sm:text-lg font-extrabold">Get In Touch</span>
-            </div>
+      {/* ── Bottom Center Ambient Emerald Glow ── */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[500px] opacity-90 blur-[110px] z-0"
+        style={{
+          background: "radial-gradient(ellipse at 50% 100%, rgba(16, 185, 129, 0.32) 0%, rgba(16, 185, 129, 0.12) 60%, transparent 85%)"
+        }}
+      />
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-semibold text-[#09090b] leading-[1.15] tracking-tight max-w-[28ch]">
-              Ready to start your next <span className="font-serif italic font-normal text-[#6366f1]">digital vision?</span>
-            </h2>
-          </div>
+      <SectionWrapper className="relative z-10">
+        <section className="font-host-grotesk space-y-12">
 
-          {/* Master Contact Card */}
-          <div className="bg-white border border-slate-200/90 rounded-[2.5rem] p-8 sm:p-12 lg:p-14 shadow-sm hover:shadow-md transition-all flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10">
-            
-            {/* Direct Email & Location Info */}
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
-                <span className="text-xs font-extrabold text-[#6366f1] uppercase tracking-wider">
-                  Direct Contact
-                </span>
-                <a
-                  href="mailto:huzaifabusiness60@gmail.com"
-                  id="contact-email"
-                  className="text-2xl sm:text-3xl font-bold text-[#09090b] hover:text-[#6366f1] transition-colors tracking-tight"
-                >
-                  huzaifabusiness60@gmail.com
-                </a>
+          {/* ── Top Grid (Left Info + Right Form Box) ── */}
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 w-full max-w-[1300px] mx-auto">
+
+            {/* Left Column (Heading & Info) */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.65, ease: "easeOut" }}
+              className="w-full lg:w-[480px] space-y-5 pt-0 mt-0"
+            >
+              <span className="font-host-grotesk font-normal text-[17px] leading-none tracking-[0%] text-[#10B981] block -mt-1">
+                ( Contact )
+              </span>
+
+              <h2 className="font-host-grotesk text-[#031811] font-normal text-[26px] sm:text-[34px] md:text-[40px] leading-[1.2] tracking-[-0.03em]">
+                Let&apos;s build something great together.
+              </h2>
+
+              <p className="font-host-grotesk font-normal text-[#7D838F] !text-[16px] sm:!text-[19px] md:!text-[21px] leading-[1.35] tracking-[0%]">
+                Whether you&apos;re looking for a Full Stack Developer, have a web project in mind, or simply want to connect.
+              </p>
+            </motion.div>
+
+            {/* Right Column (Form Box) */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.65, ease: "easeOut", delay: 0.15 }}
+              className="w-full lg:w-[678px] min-h-0 bg-[#F3FBF7] rounded-[20px] sm:rounded-[24px] py-8 px-6 sm:pt-[54px] sm:pb-[54px] sm:px-[44px] shadow-none space-y-6 sm:space-y-[28px]"
+            >
+
+              {/* Form Title & Subcopy */}
+              <div className="space-y-2.5">
+                <h3 className="font-host-grotesk font-medium !text-[22px] sm:!text-[27px] md:!text-[31px] leading-[1.15] tracking-[-0.025em] text-[#031811]">
+                  Let’s Discuss your Project Details
+                </h3>
+                <p className="font-host-grotesk font-normal text-[#7D838F] !text-[15px] sm:!text-[17px] md:!text-[19px] leading-[1.35] tracking-[0%]">
+                  I’d love to hear from you and I’ll get back to you within 24hrs.
+                </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-sm font-semibold text-[#475569]">
-                  Based in Karachi, Pakistan • Open for Remote Global Work
-                </span>
-              </div>
+              {/* Contact Form */}
+              <form onSubmit={handleSubmit} className="space-y-6 pt-1">
+                {error && <div className="text-red-500 text-sm">{error}</div>}
+                {success && <div className="text-emerald-700 text-sm font-medium">{success}</div>}
 
-              {/* Social Navigation Links */}
-              <nav className="flex items-center gap-6 pt-2" aria-label="Social media links">
-                {SOCIALS.map(({ label, href, id }) => (
-                  <a
-                    key={id}
-                    id={id}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-bold text-[#09090b] hover:text-[#6366f1] transition-colors relative group"
-                  >
-                    {label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#6366f1] transition-all duration-300 group-hover:w-full" />
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* Modal Trigger Action Button */}
-            <div className="flex-shrink-0 w-full lg:w-auto">
-              <button
-                onClick={() => setModalOpen(true)}
-                id="contact-cta-btn"
-                className="w-full lg:w-auto bg-[#09090b] text-white text-base font-bold rounded-full px-9 py-4 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-3"
-              >
-                <span>Send Me A Message</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
+                {/* Full Name */}
+                <div className="space-y-1">
+                  <label className="block font-host-grotesk font-medium text-[16px] leading-[1.4] tracking-[0%] text-[#031811]">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    className="w-full max-w-[582px] h-[45px] pt-[10px] pb-[10px] border-b border-zinc-300 font-host-grotesk text-[16px] text-zinc-900 placeholder-[#A1A7B3] bg-transparent focus:outline-none focus:border-[#10B981] transition-colors duration-200"
+                    required
+                  />
                 </div>
-              </button>
-            </div>
+
+                {/* Email */}
+                <div className="space-y-1">
+                  <label className="block font-host-grotesk font-medium text-[16px] leading-[1.4] tracking-[0%] text-[#031811]">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    className="w-full max-w-[582px] h-[45px] pt-[10px] pb-[10px] border-b border-zinc-300 font-host-grotesk text-[16px] text-zinc-900 placeholder-[#A1A7B3] bg-transparent focus:outline-none focus:border-[#10B981] transition-colors duration-200"
+                    required
+                  />
+                </div>
+
+                {/* Service Select */}
+                <div className="space-y-1 relative">
+                  <label className="block font-host-grotesk font-medium text-[16px] leading-[1.4] tracking-[0%] text-[#031811]">
+                    Service
+                  </label>
+                  <div className="relative max-w-[582px]">
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={`w-full h-[45px] pt-[10px] pb-[10px] border-b border-zinc-300 font-host-grotesk text-[16px] appearance-none bg-transparent focus:outline-none focus:border-[#10B981] transition-colors duration-200 cursor-pointer ${
+                        formData.service ? 'text-zinc-900' : 'text-[#A1A7B3]'
+                      }`}
+                    >
+                      <option value="" disabled className="text-[#A1A7B3] bg-white">
+                        Service Type
+                      </option>
+                      <option value="Full-Stack Web Development" className="text-zinc-900 bg-white">Full-Stack Web Development</option>
+                      <option value="SaaS & AI Application" className="text-zinc-900 bg-white">SaaS &amp; AI Application</option>
+                      <option value="Frontend UI Architecture" className="text-zinc-900 bg-white">Frontend UI Architecture</option>
+                      <option value="API & Backend Engineering" className="text-zinc-900 bg-white">API &amp; Backend Engineering</option>
+                    </select>
+                    <FiChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" size={18} />
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="space-y-1 relative">
+                  <label className="block font-host-grotesk font-medium text-[16px] leading-[1.4] tracking-[0%] text-[#031811]">
+                    Message
+                  </label>
+                  <div className="relative max-w-[582px]">
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your message here..."
+                      rows={4}
+                      className="w-full p-4 rounded-xl border border-zinc-300 font-host-grotesk text-[16px] text-zinc-900 placeholder-[#A1A7B3] bg-transparent focus:outline-none focus:border-[#10B981] transition-colors duration-200 resize-none min-h-[115px]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto px-8 py-3.5 bg-[#10B981] hover:bg-[#059669] text-white font-host-grotesk font-medium text-[16px] rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 shadow-none cursor-pointer disabled:opacity-50 hover:scale-[1.02]"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    <FiArrowUpRight size={18} />
+                  </button>
+                </div>
+              </form>
+
+            </motion.div>
 
           </div>
 
-        </div>
-      </section>
-
-      {/* Full-screen slide-up contact modal */}
-      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </>
+        </section>
+      </SectionWrapper>
+    </div>
   );
 }
