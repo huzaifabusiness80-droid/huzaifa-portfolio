@@ -72,7 +72,7 @@ export default function Hero() {
               />
             </motion.div>
 
-            {/* ── Headline ── */}
+            {/* ── Developer Headline ── */}
             <motion.h1
               variants={fadeUp}
               initial="hidden"
@@ -80,12 +80,12 @@ export default function Hero() {
               custom={0.1}
               className="font-host-grotesk font-medium text-zinc-950 leading-[1.2] tracking-[-0.03em] text-[28px] sm:text-[40px] md:text-[54px]"
             >
-              Designing Digital Products <br className="hidden sm:inline" />
-              that Feel <span className="font-instrument italic font-normal text-zinc-900">intuitive</span>, Look <span className="font-instrument italic font-normal text-zinc-900">Exceptional</span>, <br className="hidden sm:inline" />
-              and Create <span className="font-instrument italic font-normal text-zinc-900">Real Impact</span>.
+              Building Scalable Web Products <br className="hidden sm:inline" />
+              that Run <span className="font-instrument italic font-normal text-zinc-900">Fast</span>, Scale <span className="font-instrument italic font-normal text-zinc-900">Seamlessly</span>, <br className="hidden sm:inline" />
+              and Drive <span className="font-instrument italic font-normal text-zinc-900">Real Impact</span>.
             </motion.h1>
 
-            {/* ── Sub Copy ── */}
+            {/* ── Developer Sub Copy ── */}
             <motion.p
               variants={fadeUp}
               initial="hidden"
@@ -93,7 +93,7 @@ export default function Hero() {
               custom={0.2}
               className="text-[#7D838F] font-host-grotesk font-normal leading-[1.3] tracking-[0%] text-center max-w-[800px] text-[17px] sm:text-[20px] md:text-[24px]"
             >
-              I&apos;m a Full Stack Developer &amp; Product Engineer building high-performance web applications, scalable backends, and intuitive user experiences with Next.js, TypeScript &amp; Cloud Systems.
+              I&apos;m a Full Stack Developer &amp; Software Engineer transforming complex business ideas into high-performance web applications, robust backend APIs, and modern cloud architectures.
             </motion.p>
 
             {/* ── CTA Buttons ── */}
